@@ -1,0 +1,101 @@
+﻿@model TrabajadoresModel
+
+@{
+    List<string> oficios = ViewData["OFICIOS"] as List<string>;
+    List<Trabajador> trabajadores = null;
+    @if (Model == null)
+    {
+        trabajadores = ViewData["TRABAJADORES"] as List<Trabajador>;
+    }
+    else
+    {
+        trabajadores = Model.Trabajadores;
+    }
+}
+
+
+@{
+    ViewData["Title"] = "TrabajadoresOficio";
+}
+
+<h1>TrabajadoresOficio</h1>
+
+<form method="post">
+    <label>Seleccione un oficio: </label>
+    <select name="oficio" class="form-control">
+        @foreach (string ofi in oficios)
+        {
+            <option>@ofi</option>
+        }
+    </select>
+    <br />
+    <button class="btn btn-info">
+        Buscar empleados
+    </button>
+    <br />
+</form>
+
+
+@if (Model != null)
+{
+    <h1>@Model.Trabajadores.FirstOrDefault().Oficio</h1>
+
+    <ul class="list-group">
+        <li class="list-group-item">
+            Personas: @Model.Personas
+        </li>
+        <li class="list-group-item">
+            Personas: @Model.SumaSalarial
+        </li>
+        <li class="list-group-item">
+            Personas: @Model.MediaSalarial
+        </li>
+    </ul>
+    <hr />
+
+
+}
+
+
+@if (trabajadores != null)
+{
+    <h1>TRABAJADORES</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id Trabajador
+                </th>
+                <th>
+                    Apellido
+                </th>
+                <th>
+                    Oficio
+                </th>
+                <th>
+                    Salario
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in trabajadores)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdTrabajador)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Apellido)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Oficio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Salario)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+

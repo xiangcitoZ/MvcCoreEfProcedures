@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 string connectionString =
     builder.Configuration.GetConnectionString("SqlHospital");
 
+builder.Services.AddTransient<RepositoryTrabajadores>();
 builder.Services.AddTransient<RepositoryDoctores>();
 builder.Services.AddTransient<RepositoryVistaEmpleados>();
 builder.Services.AddTransient<RepositoryEnfermos>();
